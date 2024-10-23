@@ -7,13 +7,6 @@ interface Site {
   canonicalURL?: string
   ogImage?: string
   ogType?: string
-  theme?: Theme
-}
-
-interface Theme {
-  default: string
-  dark: string
-  light: string
 }
 
 interface HeadInfo {
@@ -26,4 +19,17 @@ interface HeadInfo {
   ogType?: string
 }
 
-export type { Site, HeadInfo }
+interface Link {
+  name: string
+  url: string
+  icon?: string
+}
+
+interface Menu {
+  name: string
+  url?: string
+  icon?: string
+  children?: Link[]
+}
+
+export type { Site, HeadInfo, Menu }
