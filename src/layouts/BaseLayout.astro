@@ -1,0 +1,22 @@
+---
+import { ViewTransitions } from 'astro:transitions'
+import type { HeadInfo } from '@types'
+import BaseHead from '@components/BaseHead.astro'
+import '@styles/global.css'
+
+type Props = HeadInfo
+
+const { ...head } = Astro.props
+---
+
+<html>
+  <head>
+    <BaseHead {...head} />
+    <ViewTransitions />
+  </head>
+  <body>
+    <main class="max-w-2xl mx-auto min-h-dvh">
+      <slot />
+    </main>
+  </body>
+</html>
