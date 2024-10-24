@@ -17,3 +17,12 @@ const { key, menu } = Astro.props
         : <MenuDropdown menu={menu} />
     }
 </>
+
+<style>
+li a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  transition:  color 0.2s, backgroud-color 0.2s;
+}
+</style>

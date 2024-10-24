@@ -11,7 +11,7 @@ const { menu } = Astro.props
 <menu-dropdown>
     <li class="menu-item flex justify-center relative">
         <button class="dropdown-btn color-header">
-            <span>{menu.name}</span>
+            <span class="menu-name">{menu.name}</span>
             <span class="expanded-arrow hidden">
                 <svg class="inline-block" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 6l6 6l-6 6" />
@@ -21,7 +21,7 @@ const { menu } = Astro.props
 
         {
             menu.children &&
-            <div class="dropdown bg-header">
+            <div class="dropdown bg-header border-0 sm:border-1 sm:border-header">
                 <ul class="flex flex-col px-10 py-3 ws-nowrap mx-auto gap-2 rd-lg ">
                     {menu.children.map(submenu => (
                         <li class="color-header">
@@ -53,10 +53,15 @@ class MenuDropdown extends HTMLElement {
 
         const allDropdowns = document.querySelectorAll(".dropdown")
         btn?.addEventListener('click', function(e) {
+            const actived = dropdown?.classList.contains("active")
+            console.log(actived)
             allDropdowns.forEach((drop) => {
                 drop.classList.remove("active")
             })
-            dropdown?.classList.toggle("active")
+
+            if (!actived) {
+                dropdown?.classList.toggle("active")
+            }
             e.stopPropagation()
         })
 
@@ -83,6 +88,14 @@ customElements.define('menu-dropdown', MenuDropdown)
 </script>
 
 <style>
+    li button,
+    li a {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        transition: color 0.2s, backgroud-color 0.2s;
+    }
+
     .dropdown {
         display: none;
         flex-direction: column;
@@ -127,7 +140,7 @@ customElements.define('menu-dropdown', MenuDropdown)
 
         .dropdown ul {
             padding-left: 0.2rem;
-            padding-top: 20px;
+            padding-top: 8px;
             padding-bottom: 0px;
             gap: 3px;
         }
